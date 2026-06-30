@@ -15,7 +15,6 @@ devtoolsKsp = "2.3.2"
 room = "2.8.4"
 errorProne = "2.50.0"
 coil = "2.7.0"
-zoomable = "2.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,7 +40,6 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 google-error-prone = { group = "com.google.errorprone", name = "error_prone_annotations", version.ref = "errorProne" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
-usuiat-zoomable = { group = "net.engawapg.lib", name = "zoomable", version.ref = "zoomable" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

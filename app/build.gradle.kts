@@ -75,5 +75,4 @@ dependencies {
     implementation(libs.room.ktx)
     implementation(libs.google.error.prone)
     implementation(libs.coil.compose)
-    implementation(libs.usuiat.zoomable)
 }

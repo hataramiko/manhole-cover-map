@@ -10,6 +10,7 @@ import com.mikohatara.manholecovermap.data.ManholeCover
 import com.mikohatara.manholecovermap.data.ManholeCoverRepository
 import com.mikohatara.manholecovermap.ui.navigation.ManholeCoverMapDestinationArgs.ITEM_ID
 import com.mikohatara.manholecovermap.util.ItemDetails
+import com.mikohatara.manholecovermap.util.toFilePath
 import com.mikohatara.manholecovermap.util.toItemDetails
 import com.mikohatara.manholecovermap.util.toManholeCover
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -121,12 +122,12 @@ class EntryViewModel @Inject constructor(
         }
     }
 
-    private fun saveImageToInternalStorage(context: Context) { //TODO
-        /*uiState.value.temporaryImageUri?.let { uri ->
-            val newImagePath = filePathFromUri(uri, context)
+    private fun saveImageToInternalStorage(context: Context) {
+        uiState.value.temporaryImageUri?.let { uri ->
+            val newImagePath = uri.toFilePath(context)
             val newItemDetails = uiState.value.itemDetails.copy(imagePath = newImagePath)
             updateUiState(newItemDetails)
-        }*/
+        }
     }
 
     private fun addNewItem() = viewModelScope.launch {

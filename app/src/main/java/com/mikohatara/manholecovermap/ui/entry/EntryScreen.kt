@@ -25,9 +25,6 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -39,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mikohatara.manholecovermap.R
+import com.mikohatara.manholecovermap.ui.prefab.pickImage
 import com.mikohatara.manholecovermap.util.ItemDetails
 
 @Composable
@@ -123,6 +121,7 @@ private fun EntryScreen(
                 Loading()
             } else {
                 EntryScreenContent(
+                    context = context,
                     itemDetails = itemDetails,
                     temporaryImageUri = temporaryImageUri,
                     isEntryValid = isEntryValid,
@@ -142,6 +141,7 @@ private fun EntryScreen(
 
 @Composable
 private fun EntryScreenContent(
+    context: Context,
     itemDetails: ItemDetails,
     temporaryImageUri: Uri?,
     isEntryValid: Boolean,
@@ -154,11 +154,13 @@ private fun EntryScreenContent(
     Column(
         modifier = modifier.verticalScroll(rememberScrollState())
     ) {
-        Image(
+        ImagePicker(
+            context = context,
             existingImagePath = itemDetails.imagePath,
             tempImageUri = temporaryImageUri,
             onPick = onImagePicked,
-            onRemove = onImageRemoved
+            onRemove = onImageRemoved,
+            modifier = Modifier.padding(16.dp)
         )
         EntryField(
             label = stringResource(R.string.country),
@@ -176,7 +178,8 @@ private fun EntryScreenContent(
             label = stringResource(R.string.city),
             value = itemDetails.city ?: "",
             onValueChange = { onValueChange(itemDetails.copy(city = it)) },
-            modifier = Modifier.padding(horizontal = 32.dp, vertical = 4.dp)
+            modifier = Modifier.padding(horizontal = 32.dp, vertical = 4.dp),
+            imeAction = ImeAction.Done
         )
         Button(
             onClick = onSave,
@@ -250,20 +253,22 @@ private fun EntryTopAppBar(
 }
 
 @Composable
-private fun Image(
+private fun ImagePicker(
+    context: Context,
     existingImagePath: String?,
     tempImageUri: Uri?,
     onPick: (Uri?) -> Unit,
     onRemove: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    /*pickItemImage( TODO
+    pickImage(
+        context = context,
         existingImagePath = existingImagePath,
         tempImageUri = tempImageUri,
         onPick = onPick,
         onRemove = onRemove,
         modifier = modifier
-    )*/
+    )
 }
 
 @Composable

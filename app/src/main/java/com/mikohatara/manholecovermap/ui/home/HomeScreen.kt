@@ -6,12 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -45,6 +42,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mikohatara.manholecovermap.R
 import com.mikohatara.manholecovermap.data.ManholeCover
+import com.mikohatara.manholecovermap.ui.prefab.HomeScreenImage
 
 @Composable
 fun HomeScreen(
@@ -134,6 +132,7 @@ private fun HomeScreenContent(
                 Item(
                     context = context,
                     modifier = onClickModifier,
+                    imagePath = item.imagePath,
                     country = item.country,
                     region = item.region,
                     city = item.city
@@ -216,7 +215,7 @@ private fun Item(
     val label = listOfNotNull(country, region).joinToString(separator = ", ")
 
     Card(
-        colors = CardDefaults.cardColors(colorScheme.surfaceContainerLow),
+        colors = CardDefaults.cardColors(colorScheme.surfaceContainer),
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
@@ -227,15 +226,7 @@ private fun Item(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(8.dp)
         ) {
-            Card(
-                modifier = Modifier.size(72.dp)
-            ) {
-                if (imagePath != null) {
-                    //TODO
-                } else {
-                    //NoImage()
-                }
-            }
+            HomeScreenImage(context, imagePath)
             Column(
                 modifier = Modifier
                     .heightIn(max = 80.dp)
