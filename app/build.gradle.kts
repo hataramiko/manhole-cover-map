@@ -74,4 +74,6 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
     implementation(libs.google.error.prone)
+    implementation(libs.coil.compose)
+    implementation(libs.usuiat.zoomable)
 }

@@ -16,6 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.mikohatara.manholecovermap.data.ManholeCoverRepository
+import com.mikohatara.manholecovermap.ui.entry.EntryScreen
 import com.mikohatara.manholecovermap.ui.home.HomeScreen
 import com.mikohatara.manholecovermap.ui.navigation.ManholeCoverMapDestinationArgs.ITEM_ID
 import com.mikohatara.manholecovermap.ui.navigation.ManholeCoverMapDestinations.ENTRY_NEW_ROUTE
@@ -54,22 +55,22 @@ fun ManholeCoverMapNavGraph(
                 onNewItem = {
                     navActions.navigateToEntryScreen(null)
                 },
-                onItemClick = { /*item -> TODO
-                    val itemId = item.id
-                    navActions.navigateToEntryScreen(itemId)*/
+                onItemClick = {
+                    val itemId = it.id
+                    navActions.navigateToEntryScreen(itemId)
                 }
             )
         }
         composable(
             route = ENTRY_NEW_ROUTE
         ) {
-            //EntryScreen(onBack = onBack) TODO
+            EntryScreen(onBack = onBack)
         }
         composable(
             route = ENTRY_OLD_ROUTE,
-            arguments = listOf(navArgument(ITEM_ID) { type = NavType.StringType })
+            arguments = listOf(navArgument(ITEM_ID) { type = NavType.IntType })
         ) {
-            //EntryScreen(onBack = onBack) TODO
+            EntryScreen(onBack = onBack)
         }
     }
 }

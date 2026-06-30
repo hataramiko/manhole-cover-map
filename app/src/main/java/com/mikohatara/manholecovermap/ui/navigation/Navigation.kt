@@ -30,7 +30,7 @@ class ManholeCoverMapNavActions(private val navController: NavHostController) {
 
     fun navigateToEntryScreen(itemId: Int? = null) {
         navController.navigate(
-            if (itemId == null) {
+            if (itemId != null) {
                 "$ENTRY_SCREEN/$itemId"
             } else {
                 ENTRY_NEW_ROUTE
